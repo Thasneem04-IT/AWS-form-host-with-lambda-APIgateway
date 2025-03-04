@@ -1,15 +1,44 @@
-document.getElementById("dataForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
+var API_URL = "PASTE-YOUR-ENDPOINT";
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
+document.getElementById("savestudent").onclick = function(){
+    var inputData = {
+        "studentid": $('#studentid').val(),
+        "name": $('#name').val(),
+        "class": $('#class').val(),
+        "age": $('#age').val()
+    };
+    $.ajax({
+        url: API_URL,
+        type: 'POST',
+        data:  JSON.stringify(inputData),
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            document.getElementById("studentSaved").innerHTML = "Student Data Saved Successfully!";
+        },
+        error: function () {
+            alert("Error saving student data.");
+        }
+    });
+}
 
-  const response = await fetch("https://9jmnls5e5g.execute-api.ap-south-1.amazonaws.com/prod/submit-form", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email })
-  });
-
-  const result = await response.json();
-  alert(result.message || "Form submitted successfully!");
-});
+document.getElementById("getstudents").onclick = function(){  
+    $.ajax({
+        url: API_URL,
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            $('#studentTable tr').slice(1).remove();
+            jQuery.each(response, function(i, data) {          
+                $("#studentTable").append("<tr> \
+                    <td>" + data['studentid'] + "</td> \
+                    <td>" + data['name'] + "</td> \
+                    <td>" + data['class'] + "</td> \
+                    <td>" + data['age'] + "</td> \
+                    </tr>");
+            });
+        },
+        error: function () {
+            alert("Error retrieving student data.");
+        }
+    });
+}
