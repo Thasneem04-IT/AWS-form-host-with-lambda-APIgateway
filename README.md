@@ -21,10 +21,10 @@ This project demonstrates how to use **AWS API Gateway**, **Lambda**, and **Dyna
 
 ## **Pre requisite:** ##
 Create an IAM role with the following policies:
-CloudWatch Logs (for debugging)
-DynamoDB Read/Write (PutItem, Scan)
-API Gateway Invocation (to process HTTP requests)
-S3 Read/Write (if your Lambda function interacts with S3)
+- CloudWatch Logs (for debugging)
+- DynamoDB Read/Write (PutItem, Scan)
+- API Gateway Invocation (to process HTTP requests)
+- S3 Read/Write (if your Lambda function interacts with S3)
 
 ---
 
