@@ -19,6 +19,15 @@ This project demonstrates how to use **AWS API Gateway**, **Lambda**, and **Dyna
 
 ## **Setup and Deployment**  
 
+## **Pre requisite:** ##
+Create an IAM role with the following policies:
+CloudWatch Logs (for debugging)
+DynamoDB Read/Write (PutItem, Scan)
+API Gateway Invocation (to process HTTP requests)
+S3 Read/Write (if your Lambda function interacts with S3)
+
+---
+
 ### **Step 1: Host the Frontend on S3**  
 1. Go to the **AWS S3 Console** → Create a new bucket.  
 2. Enable **static website hosting**.  
